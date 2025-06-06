@@ -1,0 +1,293 @@
+</script><!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ translations[lang].title }} - Game Developer Portfolio</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue@3.2.47/dist/vue.global.prod.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .gradient-bg {
+      background: linear-gradient(135deg, #286bd8 20%, #6d9eeb 50%, #286bd8 85%);
+    }
+    .hover-scale {
+      transition: transform 0.3s ease;
+    }
+    .hover-scale:hover {
+      transform: scale(1.05);
+    }
+    .flag-icon {
+      width: 32px;
+      height: 24px;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: opacity 0.3s;
+    }
+    .flag-icon:hover {
+      opacity: 0.8;
+    }
+    .profile-img {
+      aspect-ratio: 1 / 1;
+      -o-object-fit: cover;
+         object-fit: cover;
+      height: 100%;
+      width: auto;
+    }
+    .description {
+      white-space: pre-line;
+    }
+  </style>
+</head>
+<body class="bg-gray-900 text-white font-sans">
+  <div id="app">
+    <!-- Header -->
+    <header class="gradient-bg py-4 sticky top-0 z-10">
+      <nav class="container mx-auto flex justify-between items-center px-4">
+        <h1 class="text-2xl font-bold">{{ translations[lang].name }}</h1>
+        <div class="flex items-center space-x-8 absolute left-1/2 transform -translate-x-1/2">
+          <img src="https://flagcdn.com/h24/ru.png" alt="Russian Flag" class="flag-icon" @click="setLanguage('ru')">
+          <img src="https://flagcdn.com/h24/us.png" alt="US Flag" class="flag-icon" @click="setLanguage('en')">
+        </div>
+        <ul class="flex space-x-6">
+          <li><a href="#about" class="hover:text-blue-300">{{ translations[lang].nav.about }}</a></li>
+          <li><a href="#skills" class="hover:text-blue-300">{{ translations[lang].nav.skills }}</a></li>
+          <li><a href="#experience" class="hover:text-blue-300">{{ translations[lang].nav.experience }}</a></li>
+          <li><a href="#projects" class="hover:text-blue-300">{{ translations[lang].nav.projects }}</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-12">
+      <!-- About Section -->
+      <section id="about" class="mb-16">
+        <h2 class="text-3xl font-bold mb-6 text-center">{{ translations[lang].about.title }}</h2>
+        <div class="flex flex-col md:flex-row items-start md:space-x-8">
+          <img src="/portfolio/images/photo.png" alt="Oleg Gaidukov" class="profile-img rounded-lg mb-4 md:mb-0">
+          <div>
+            <h3 class="text-2xl font-semibold">{{ translations[lang].about.role }}</h3>
+            <p class="mt-2 description">{{ translations[lang].about.description }}</p>
+            <div class="mt-4 space-y-2">
+              <p><strong>{{ translations[lang].about.email }}:</strong> <a href="mailto:oleg0216@gmail.com" class="text-blue-400 hover:underline">oleg0216@gmail.com</a></p>
+              <p><strong>{{ translations[lang].about.telegram }}:</strong> <a href="https://t.me/olegaid" class="text-blue-400 hover:underline">@olegaid</a></p>
+              <p><strong>{{ translations[lang].about.github }}:</strong> <a href="https://github.com/SharpShrk" class="text-blue-400 hover:underline">SharpShrk</a></p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Skills Section -->
+      <section id="skills" class="mb-16">
+        <h2 class="text-3xl font-bold mb-6 text-center">{{ translations[lang].skills.title }}</h2>
+        <div class="grid grid-cols-2 md:grid-cols-5 gap-4">
+          <span v-for="skill in skills" class="bg-blue-800 text-center py-2 rounded-lg">{{ skill }}</span>
+        </div>
+      </section>
+
+      <!-- Experience Section -->
+      <section id="experience" class="mb-16">
+        <h2 class="text-3xl font-bold mb-6 text-center">{{ translations[lang].experience.title }}</h2>
+        <div class="bg-gray-800 p-6 rounded-lg">
+          <h3 class="text-xl font-semibold">{{ translations[lang].experience.company }}</h3>
+          <p class="text-gray-400">03/2023 - 04/2025</p>
+          <ul class="list-disc list-inside mt-4 space-y-2">
+            <li v-for="duty in translations[lang].experience.duties">{{ duty }}</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- Projects Section -->
+      <section id="projects" class="mb-16">
+        <h2 class="text-3xl font-bold mb-6 text-center">{{ translations[lang].projects.title }}</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div v-for="project in translations[lang].projects.list" class="flex bg-gray-800 rounded-lg overflow-hidden hover-scale">
+            <img :src="project.image" :alt="project.title" class="w-1/3 object-cover">
+            <div class="p-4 w-2/3">
+              <h3 class="text-xl font-semibold">{{ project.title }}</h3>
+              <p class="text-gray-400">{{ project.description }}</p>
+              <a :href="project.link" class="text-blue-400 hover:underline mt-2 inline-block">{{ translations[lang].projects.viewDetails }}</a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="gradient-bg py-4">
+      <div class="container mx-auto text-center">
+        <p>{{ translations[lang].footer }}</p>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    const { createApp } = Vue;
+
+    createApp({
+      data() {
+        return {
+          lang: 'ru',
+          translations: {
+            en: {
+              title: 'Oleg Gaidukov',
+              name: 'Oleg Gaidukov',
+              nav: {
+                about: 'About',
+                skills: 'Skills',
+                experience: 'Experience',
+                projects: 'Projects'
+              },
+              about: {
+                title: 'About Me',
+                role: 'Oleg Gaidukov - Unity Developer',
+                description: 'Game developer with experience in C# programming and knowledge of C++, Python, assembler. \nI am passionate about creating complex game mechanics, 3D modeling and process automation. I am interested in circuitry and robotics, which helps in developing non-standard game solutions. \nI strive to create interactive and immersive worlds where players feel the impact of their actions. I am constantly studying new technologies and approaches in game development. \nMy goal is to develop games that are exciting, challenging and memorable.',
+                email: 'Email',
+                telegram: 'Telegram',
+                github: 'GitHub'
+              },
+              skills: {
+                title: 'Skills'
+              },
+              experience: {
+                title: 'Work Experience',
+                company: 'Unity Developer - AGAVA',
+                duties: [
+                  'Developed complex systems such as tower upgrades, level generation, enemy AI for 2 games with DAU 10K+. Also implemented visual response mechanics to audio spectrum and serialization of spectrograms in JSON',
+                  'Optimized performance: stable 60 FPS on mobile devices (reduced drop-offs from 35% to 5%).',
+                  'Ported games to WebGL (Yandex.Games), including UI adaptation for different resolutions.',
+                  'Reduced scene loading time by an average of 20% via Addressables.',
+                  'Integrated advertising SDKs (Unity Ads, Yandex, Appodeal), increasing revenue by 15%.',
+                  'Set up analytics (Firebase, AppMetrica) to track retention (35% on average on D7). I track key points of player loss (drop-off points) through analytics to identify weak points in game design and increase retention'
+                ]
+              },
+              projects: {
+                title: 'Projects',
+                viewDetails: 'View Details',
+                list: [
+                  {
+                    title: 'Metallic Citadel',
+                    description: 'A Tower Defence game where players defend a base from enemy waves by managing resources strategically.',
+                    image: 'https://via.placeholder.com/300x200',
+                    link: '/projects/metallic-citadel.html'
+                  },
+                  {
+                    title: 'Impervious Defence',
+                    description: 'An action-packed game where players defend a fortress against relentless enemy waves.',
+                    image: 'https://via.placeholder.com/300x200',
+                    link: '/projects/impervious-defence.html'
+                  },
+                  {
+                    title: 'AnimeQuiz',
+                    description: 'A quiz for anime fans. Allows you to test your knowledge in three exciting modes.',
+                    image: 'projects/public/images/anime-quiz/main_icon.png',
+                    link: '/projects/anime-quiz.html'
+                  },
+                  {
+                    title: 'BrainrotQuiz',
+                    description: 'Meme quiz about Italian Brainrot.',
+                    image: 'https://via.placeholder.com/300x200',
+                    link: '/projects/brainrot-quiz.html'
+                  },
+                  {
+                    title: 'Novel',
+                    description: 'Meme quiz about Italian Brainrot.',
+                    image: 'https://via.placeholder.com/300x200',
+                    link: '/projects/novel.html'
+                  },
+                  {
+                    title: 'ForgottenLands',
+                    description: 'Meme quiz about Italian Brainrot.',
+                    image: 'https://via.placeholder.com/300x200',
+                    link: '/projects/forgotten-lands.html'
+                  }
+                ]
+              },
+              footer: '© 2025 Oleg Gaidukov. All rights reserved.'
+            },
+            ru: {
+              title: 'Олег Гайдуков',
+              name: 'Олег Гайдуков',
+              nav: {
+                about: 'Обо мне',
+                skills: 'Навыки',
+                experience: 'Опыт работы',
+                projects: 'Проекты'
+              },
+              about: {
+                title: 'Обо мне',
+                role: 'Олег Гайдуков - Разработчик Unity',
+                description: 'Разработчик игр с опытом программирования на C# и знанием C++, Python, ассемблера. \nУвлекаюсь созданием сложных игровых механик, 3D-моделированием и автоматизацией процессов. Интересуюсь схемотехникой и робототехникой, что помогает в разработке нестандартных игровых решений. \nСтремлюсь создавать интерактивные и immersive-миры, где игроки чувствуют влияние своих действий. Постоянно изучаю новые технологии и подходы в геймдеве. \nМоя цель — разрабатывать игры, которые увлекают, бросают вызов и запоминаются.',
+                email: 'Почта',
+                telegram: 'Телеграм',
+                github: 'GitHub'
+              },
+              skills: {
+                title: 'Навыки'
+              },
+              experience: {
+                title: 'Опыт работы',
+                company: 'Unity Developer - AGAVA',
+                duties: [
+                  'Разработка сложных систем, таких как апгрейд башен, генерация уровней, AI врагов для 2 игр с DAU 10K+. Также реализовал механику визуальной реакции на аудиоспектр и сериализацию спектрограмм в JSON',
+                  'Оптимизировал производительность: FPS стабильный 60 на мобильных устройствах (снижение просадок с 35% до 5%).',
+                  'Портирование игр на WebGL (Яндекс.Игры), включая адаптацию UI под разные разрешения.',
+                  'Сократил время загрузки сцен в среднем на 20% через Addressables.',
+                  'Интегрировал рекламные SDK (Unity Ads, Yandex, Appodeal), увеличив доход на 15%.',
+                  'Настроил аналитику (Firebase, AppMetrica) для отслеживания retention (в среднем 35% на D7). Отслеживаю ключевые точки потери игроков (drop-off points) через аналитику, чтобы определить слабые места в геймдизайне и повысить удержание.'
+                ]
+              },
+              projects: {
+                title: 'Проекты',
+                viewDetails: 'Подробнее',
+                list: [
+                  {
+                    title: 'Металлический шторм',
+                    description: 'Игра в жанре Tower Defence, где игроки защищают базу от волн врагов, стратегически управляя ресурсами.',
+                    image: 'https://via.placeholder.com/300x200',
+                    link: '/projects/metallic-citadel.html'
+                  },
+                  {
+                    title: 'Глухая Оборона',
+                    description: 'Экшн-игра, в которой игроки защищают крепость от непрерывных волн врагов.',
+                    image: 'https://via.placeholder.com/300x200',
+                    link: '/projects/impervious-defence.html'
+                  },
+                  {
+                    title: 'Аниме Квиз',
+                    description: 'Квиз для поклонников аниме. Позволяет проверить свои знания в трех увлекательных режимах.',
+                    image: '/images/anime-quiz/main_icon.png',
+                    link: '/projects/anime-quiz.html'
+                  },
+                  {
+                    title: 'Брейнрот Квиз',
+                    description: 'Мемный квиз про итальянский брейнрот.',
+                    image: 'https://via.placeholder.com/300x200',
+                    link: '/projects/brainrot-quiz.html'
+                  },
+                  {
+                    title: 'Novel',
+                    description: 'Визуальная новелла о школьной жизни.',
+                    image: 'https://via.placeholder.com/300x200',
+                    link: '/projects/novel.html'
+                  },
+                  {
+                    title: 'Забытые земли',
+                    description: 'Небольшой платформер.',
+                    image: 'https://via.placeholder.com/300x200',
+                    link: '/projects/forgotten-lands.html'
+                  }
+                ]
+              },
+              footer: '© 2025 Олег Гайдуков. Все права защищены.'
+            }
+          },
+          skills: ['C#', 'Unity', 'Git', 'OOP', 'SOLID', 'SDK', 'MVC', 'DRY', 'KISS', 'Zenject', 'Addressables', 'UniTask', 'DOTween', 'HLSL', 'Figma']
+        };
+      },
+      methods: {
+        setLanguage(lang) {
+          this.lang = lang;
+        }
+      }
+    }).mount('#app');
+  </script>
