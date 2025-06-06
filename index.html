@@ -1,4 +1,4 @@
-</script><!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -99,11 +99,11 @@
       <section id="projects" class="mb-16">
         <h2 class="text-3xl font-bold mb-6 text-center">{{ translations[lang].projects.title }}</h2>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <div v-for="project in translations[lang].projects.list" class="flex bg-gray-800 rounded-lg overflow-hidden hover-scale">
-            <img :src="project.image" :alt="project.title" class="w-1/3 object-cover">
+          <div v-for="project in projects" class="flex bg-gray-800 rounded-lg overflow-hidden hover-scale">
+            <img :src="project.image" :alt="translations[lang].projects.list[project.key].title" class="w-1/3 object-cover">
             <div class="p-4 w-2/3">
-              <h3 class="text-xl font-semibold">{{ project.title }}</h3>
-              <p class="text-gray-400">{{ project.description }}</p>
+              <h3 class="text-xl font-semibold">{{ translations[lang].projects.list[project.key].title }}</h3>
+              <p class="text-gray-400">{{ translations[lang].projects.list[project.key].description }}</p>
               <a :href="project.link" class="text-blue-400 hover:underline mt-2 inline-block">{{ translations[lang].projects.viewDetails }}</a>
             </div>
           </div>
@@ -126,6 +126,38 @@
       data() {
         return {
           lang: 'ru',
+          projects: [
+            {
+              key: 'metallicCitadel',
+              image: 'https://via.placeholder.com/300x200',
+              link: '/projects/metallic-citadel.html'
+            },
+            {
+              key: 'imperviousDefence',
+              image: 'https://via.placeholder.com/300x200',
+              link: '/projects/impervious-defence.html'
+            },
+            {
+              key: 'animeQuiz',
+              image: '/images/anime-quiz/main_icon.png',
+              link: '/projects/anime-quiz.html'
+            },
+            {
+              key: 'brainrotQuiz',
+              image: 'https://via.placeholder.com/300x200',
+              link: '/projects/brainrot-quiz.html'
+            },
+            {
+              key: 'novel',
+              image: 'https://via.placeholder.com/300x200',
+              link: '/projects/novel.html'
+            },
+            {
+              key: 'forgottenLands',
+              image: 'https://via.placeholder.com/300x200',
+              link: '/projects/forgotten-lands.html'
+            }
+          ],
           translations: {
             en: {
               title: 'Oleg Gaidukov',
@@ -162,44 +194,32 @@
               projects: {
                 title: 'Projects',
                 viewDetails: 'View Details',
-                list: [
-                  {
+                list: {
+                  metallicCitadel: {
                     title: 'Metallic Citadel',
-                    description: 'A Tower Defence game where players defend a base from enemy waves by managing resources strategically.',
-                    image: 'https://via.placeholder.com/300x200',
-                    link: '/projects/metallic-citadel.html'
+                    description: 'A Tower Defence game where players defend a base from enemy waves by managing resources strategically.'
                   },
-                  {
+                  imperviousDefence: {
                     title: 'Impervious Defence',
-                    description: 'An action-packed game where players defend a fortress against relentless enemy waves.',
-                    image: 'https://via.placeholder.com/300x200',
-                    link: '/projects/impervious-defence.html'
+                    description: 'An action-packed game where players defend a fortress against relentless enemy waves.'
                   },
-                  {
+                  animeQuiz: {
                     title: 'AnimeQuiz',
-                    description: 'A quiz for anime fans. Allows you to test your knowledge in three exciting modes.',
-                    image: 'projects/public/images/anime-quiz/main_icon.png',
-                    link: '/projects/anime-quiz.html'
+                    description: 'A quiz for anime fans. Allows you to test your knowledge in three exciting modes.'
                   },
-                  {
+                  brainrotQuiz: {
                     title: 'BrainrotQuiz',
-                    description: 'Meme quiz about Italian Brainrot.',
-                    image: 'https://via.placeholder.com/300x200',
-                    link: '/projects/brainrot-quiz.html'
+                    description: 'Meme quiz about Italian Brainrot.'
                   },
-                  {
+                  novel: {
                     title: 'Novel',
-                    description: 'Meme quiz about Italian Brainrot.',
-                    image: 'https://via.placeholder.com/300x200',
-                    link: '/projects/novel.html'
+                    description: 'Meme quiz about Italian Brainrot.'
                   },
-                  {
+                  forgottenLands: {
                     title: 'ForgottenLands',
-                    description: 'Meme quiz about Italian Brainrot.',
-                    image: 'https://via.placeholder.com/300x200',
-                    link: '/projects/forgotten-lands.html'
+                    description: 'Meme quiz about Italian Brainrot.'
                   }
-                ]
+                }
               },
               footer: '© 2025 Oleg Gaidukov. All rights reserved.'
             },
@@ -238,44 +258,32 @@
               projects: {
                 title: 'Проекты',
                 viewDetails: 'Подробнее',
-                list: [
-                  {
+                list: {
+                  metallicCitadel: {
                     title: 'Металлический шторм',
-                    description: 'Игра в жанре Tower Defence, где игроки защищают базу от волн врагов, стратегически управляя ресурсами.',
-                    image: 'https://via.placeholder.com/300x200',
-                    link: '/projects/metallic-citadel.html'
+                    description: 'Игра в жанре Tower Defence, где игроки защищают базу от волн врагов, стратегически управляя ресурсами.'
                   },
-                  {
+                  imperviousDefence: {
                     title: 'Глухая Оборона',
-                    description: 'Экшн-игра, в которой игроки защищают крепость от непрерывных волн врагов.',
-                    image: 'https://via.placeholder.com/300x200',
-                    link: '/projects/impervious-defence.html'
+                    description: 'Экшн-игра, в которой игроки защищают крепость от непрерывных волн врагов.'
                   },
-                  {
+                  animeQuiz: {
                     title: 'Аниме Квиз',
-                    description: 'Квиз для поклонников аниме. Позволяет проверить свои знания в трех увлекательных режимах.',
-                    image: '/images/anime-quiz/main_icon.png',
-                    link: '/projects/anime-quiz.html'
+                    description: 'Квиз для поклонников аниме. Позволяет проверить свои знания в трех увлекательных режимах.'
                   },
-                  {
+                  brainrotQuiz: {
                     title: 'Брейнрот Квиз',
-                    description: 'Мемный квиз про итальянский брейнрот.',
-                    image: 'https://via.placeholder.com/300x200',
-                    link: '/projects/brainrot-quiz.html'
+                    description: 'Мемный квиз про итальянский брейнрот.'
                   },
-                  {
-                    title: 'Novel',
-                    description: 'Визуальная новелла о школьной жизни.',
-                    image: 'https://via.placeholder.com/300x200',
-                    link: '/projects/novel.html'
+                  novel: {
+                    title: 'Новелла',
+                    description: 'Визуальная новелла о школьной жизни.'
                   },
-                  {
+                  forgottenLands: {
                     title: 'Забытые земли',
-                    description: 'Небольшой платформер.',
-                    image: 'https://via.placeholder.com/300x200',
-                    link: '/projects/forgotten-lands.html'
+                    description: 'Небольшой платформер.'
                   }
-                ]
+                }
               },
               footer: '© 2025 Олег Гайдуков. Все права защищены.'
             }
@@ -290,3 +298,5 @@
       }
     }).mount('#app');
   </script>
+</body>
+</html>

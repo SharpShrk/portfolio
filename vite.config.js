@@ -3,7 +3,6 @@ import vue from '@vitejs/plugin-vue';
 import { globSync } from 'glob';
 import path from 'path';
 
-// Находим все HTML-файлы
 const entries = {
   index: './index.html',
   ...Object.fromEntries(
@@ -16,7 +15,8 @@ const entries = {
 
 export default defineConfig({
   plugins: [vue()],
-  base: '/portfolio/',
+  base: '/',
+  publicDir: 'public',
   build: {
     outDir: 'dist',
     assetsDir: 'assets',
