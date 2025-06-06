@@ -1,12 +1,27 @@
 import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
+import { globSync } from 'glob';
+import path from 'path';
 
-// Конфигурация Vite для сборки проекта
+// Находим все HTML-файлы
+const entries = {
+  index: './index.html',
+  ...Object.fromEntries(
+    globSync('./projects/*.html').map(file => [
+      path.basename(file, '.html'),
+      path.resolve(file)
+    ])
+  )
+};
+
 export default defineConfig({
-  plugins: [vue()], // Поддержка Vue-компонентов
-  base: '/portfolio/', // Базовый путь для GitHub Pages (замени 'portfolio' на имя твоего репозитория)
+  plugins: [vue()],
+  base: '/portfolio/',
   build: {
-    outDir: 'dist', // Папка для собранных файлов
-    assetsDir: 'assets' // Папка для статических ресурсов (CSS, изображения)
+    outDir: 'dist',
+    assetsDir: 'assets',
+    rollupOptions: {
+      input: entries
+    }
   }
 });
